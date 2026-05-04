@@ -1,0 +1,25 @@
+name: Java CI/CD Pipeline
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build-deploy:
+    runs-on: ubuntu:latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Build using Maven
+        run: mvn clean package
+
+      - name: Deployment
+        run: |
+          echo "Deploying Application..."
+          
